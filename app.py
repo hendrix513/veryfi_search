@@ -73,21 +73,6 @@ def get_client(username):
                   decrypt_data(user_info['api_key']))
 
 
-def modify_query_with_username(incoming_query):
-    # Add the condition for meta.username to the existing query
-    modified_query = {
-        "query":
-            {
-                "bool": {
-                    "must": [
-                        incoming_query["query"],  # The original query
-                        {"match": {"meta.owner": {"query": get_jwt_identity()}}}
-                    ]
-                }
-            }}
-    return modified_query
-
-
 @app.route('/register', methods=['POST'])
 def register():
     data = request.get_json()
