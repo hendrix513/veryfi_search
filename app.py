@@ -17,8 +17,6 @@ from cryptography.fernet import Fernet
 import logging
 
 es = Elasticsearch([os.environ['ELASTICSEARCH_URL']])
-es_index = 'documents'
-
 
 def wait_for_elasticsearch():
     while True:
@@ -34,6 +32,10 @@ def wait_for_elasticsearch():
 
 
 wait_for_elasticsearch()
+
+es_index = 'documents'
+if not es.indices.exists(index=es_index):
+    es.indices.create(index=es_index)
 
 app = Flask(__name__)
 app.logger.setLevel(logging.INFO)
