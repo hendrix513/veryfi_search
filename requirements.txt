@@ -1,0 +1,7 @@
+flask
+elasticsearch
+veryfi
+pytest
+flask_jwt_extended
+flask-bcrypt
+cryptography
